@@ -70,8 +70,8 @@ def train(model, dataloader, criterion, optimizer):
     return epoch_loss
 
 
-# 테스트 함수
-def test(model, dataloader, criterion):
+# 평가 함수
+def evaluate(model, dataloader, criterion):
     model.eval()
     correct = 0
     total = 0
@@ -95,13 +95,13 @@ def test(model, dataloader, criterion):
     return epoch_loss, accuracy
 
 
-# 학습 및 테스트 수행
+# 학습 및 평가 수행
 num_epochs = 10
 epoch_results = []
 
 for epoch in range(num_epochs):
     train_loss = train(model, train_dataloader, criterion, optimizer)
-    test_loss, accuracy = test(model, test_dataloader, criterion)
+    test_loss, accuracy = evaluate(model, test_dataloader, criterion)
 
     epoch_result = {'epoch': epoch + 1, 'train_loss': train_loss, 'test_loss': test_loss, 'accuracy': accuracy}
     epoch_results.append(epoch_result)
