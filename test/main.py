@@ -8,6 +8,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
+import datetime
 
 # 데이터셋 및 변환 설정
 data_transforms = {
@@ -51,7 +52,7 @@ loss_data = {'train': [], 'test': []}
 accuracy_data = []
 
 # 학습 함수
-def train(model, dataloader, criterion, optimizer):
+def train(model, dataloader, criterion, optimizer, epoch):
     model.train()
     running_loss = 0.0
 
@@ -67,11 +68,17 @@ def train(model, dataloader, criterion, optimizer):
         loss_data['train'].append(loss.item())
 
     epoch_loss = running_loss / len(dataloader)
+
+    # 로그 파일에 저장
+    log_string = f"Epoch {epoch}/{num_epochs} Train Loss: {epoch_loss:.4f}\n"
+    with open(log_file, 'a') as f:
+        f.write(log_string)
+
     return epoch_loss
 
 
 # 평가 함수
-def evaluate(model, dataloader, criterion):
+def evaluate(model, dataloader, criterion, epoch):
     model.eval()
     correct = 0
     total = 0
@@ -92,6 +99,12 @@ def evaluate(model, dataloader, criterion):
 
     epoch_loss = running_loss / len(dataloader)
     accuracy = correct / total
+
+    # 로그 파일에 저장
+    log_string = f"Epoch {epoch}/{num_epochs} Test Loss: {epoch_loss:.4f}, Accuracy: {accuracy:.4f}\n"
+    with open(log_file, 'a') as f:
+        f.write(log_string)
+
     return epoch_loss, accuracy
 
 
@@ -99,9 +112,17 @@ def evaluate(model, dataloader, criterion):
 num_epochs = 10
 epoch_results = []
 
+# 로그 파일 경로
+log_file = 'log.txt'
+
+# 초기 로그 파일 생성
+with open(log_file, 'w') as f:
+    f.write("Training and Testing Results\n")
+    f.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n\n")
+
 for epoch in range(num_epochs):
-    train_loss = train(model, train_dataloader, criterion, optimizer)
-    test_loss, accuracy = evaluate(model, test_dataloader, criterion)
+    train_loss = train(model, train_dataloader, criterion, optimizer, epoch)
+    test_loss, accuracy = evaluate(model, test_dataloader, criterion, epoch)
 
     epoch_result = {'epoch': epoch + 1, 'train_loss': train_loss, 'test_loss': test_loss, 'accuracy': accuracy}
     epoch_results.append(epoch_result)

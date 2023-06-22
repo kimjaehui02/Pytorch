@@ -1,0 +1,23 @@
+Training and Testing Results
+2023-06-22 22:51:52
+
+Epoch 0/10 Train Loss: 0.7090
+Epoch 0/10 Test Loss: 0.4714, Accuracy: 0.8500
+Epoch 1/10 Train Loss: 0.4013
+Epoch 1/10 Test Loss: 0.1939, Accuracy: 1.0000
+Epoch 2/10 Train Loss: 0.3760
+Epoch 2/10 Test Loss: 0.1906, Accuracy: 0.9500
+Epoch 3/10 Train Loss: 0.1534
+Epoch 3/10 Test Loss: 0.0865, Accuracy: 0.9500
+Epoch 4/10 Train Loss: 0.2874
+Epoch 4/10 Test Loss: 0.0559, Accuracy: 0.9500
+Epoch 5/10 Train Loss: 0.0984
+Epoch 5/10 Test Loss: 0.1357, Accuracy: 0.9500
+Epoch 6/10 Train Loss: 0.0693
+Epoch 6/10 Test Loss: 0.0728, Accuracy: 0.9500
+Epoch 7/10 Train Loss: 0.1409
+Epoch 7/10 Test Loss: 0.1233, Accuracy: 0.9500
+Epoch 8/10 Train Loss: 0.1278
+Epoch 8/10 Test Loss: 0.1152, Accuracy: 0.9500
+Epoch 9/10 Train Loss: 0.0176
+Epoch 9/10 Test Loss: 0.0929, Accuracy: 0.9500
